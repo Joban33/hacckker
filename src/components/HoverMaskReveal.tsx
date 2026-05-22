@@ -26,7 +26,7 @@ export const HoverMaskReveal: React.FC<HoverMaskRevealProps> = ({
   const velocityX = useVelocity(smoothX);
   const velocityY = useVelocity(smoothY);
   
-  // Animate the mask circle radius from 0 to 220px and opacity from 0 to 1 on hover
+  // Animate the circular mask radius from 0 to 200px and opacity from 0 to 1 on hover
   const maskRadius = useMotionValue(0);
   const maskOpacity = useMotionValue(0);
   const smoothRadius = useSpring(maskRadius, springConfig);
@@ -57,22 +57,35 @@ export const HoverMaskReveal: React.FC<HoverMaskRevealProps> = ({
     setIsHovered(false);
   };
 
-  // Multi-lobed mask: a dense core with velocity-driven trailing pockets.
+  // Circular fluid mask: a stable round core with small circular edge pockets.
   const maskImage = useTransform(
     [smoothX, smoothY, smoothRadius, velocityX, velocityY],
     (latest) => {
       const [x, y, r, vx, vy] = latest as number[];
       const velocity = Math.min(1, Math.hypot(vx, vy) / 900);
-      const trailX = Math.max(-90, Math.min(90, vx * 0.08));
-      const trailY = Math.max(-90, Math.min(90, vy * 0.08));
-      const stretchX = r * (1.05 + velocity * 0.7);
-      const stretchY = r * (0.62 + velocity * 0.18);
+      const angle = Math.atan2(vy || 0.001, vx || 0.001);
+      const drift = 16 + velocity * 28;
+      const orbitA = angle + Math.PI * 0.45;
+      const orbitB = angle - Math.PI * 0.62;
+      const orbitC = angle + Math.PI * 1.12;
+      const pocketA = {
+        x: x + Math.cos(orbitA) * drift,
+        y: y + Math.sin(orbitA) * drift,
+      };
+      const pocketB = {
+        x: x + Math.cos(orbitB) * drift * 0.78,
+        y: y + Math.sin(orbitB) * drift * 0.78,
+      };
+      const pocketC = {
+        x: x + Math.cos(orbitC) * drift * 0.58,
+        y: y + Math.sin(orbitC) * drift * 0.58,
+      };
 
       return [
-        `radial-gradient(ellipse ${stretchX}px ${stretchY}px at ${x}px ${y}px, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 34%, rgba(0,0,0,0.7) 54%, rgba(0,0,0,0) 78%)`,
-        `radial-gradient(circle ${r * 0.46}px at ${x - trailX}px ${y - trailY}px, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.42) 54%, rgba(0,0,0,0) 86%)`,
-        `radial-gradient(circle ${r * 0.32}px at ${x + trailY * 0.55}px ${y - trailX * 0.45}px, rgba(0,0,0,0.74) 0%, rgba(0,0,0,0) 78%)`,
-        `radial-gradient(circle ${r * 0.24}px at ${x - trailY * 0.75}px ${y + trailX * 0.55}px, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0) 80%)`,
+        `radial-gradient(circle ${r}px at ${x}px ${y}px, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 42%, rgba(0,0,0,0.78) 62%, rgba(0,0,0,0) 82%)`,
+        `radial-gradient(circle ${r * 0.26}px at ${pocketA.x}px ${pocketA.y}px, rgba(0,0,0,0.76) 0%, rgba(0,0,0,0.34) 48%, rgba(0,0,0,0) 78%)`,
+        `radial-gradient(circle ${r * 0.2}px at ${pocketB.x}px ${pocketB.y}px, rgba(0,0,0,0.64) 0%, rgba(0,0,0,0.28) 52%, rgba(0,0,0,0) 80%)`,
+        `radial-gradient(circle ${r * 0.16}px at ${pocketC.x}px ${pocketC.y}px, rgba(0,0,0,0.54) 0%, rgba(0,0,0,0) 76%)`,
       ].join(', ');
     }
   );
