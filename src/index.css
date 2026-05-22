@@ -66,20 +66,17 @@ html, body, #root {
 
 @keyframes sectionWake {
   0% {
-    opacity: 0.35;
-    transform: translateY(80px) scale(0.985);
-    filter: blur(4px);
+    opacity: 0.72;
+    transform: translateY(44px) scale(0.992);
   }
   35%,
   70% {
     opacity: 1;
     transform: translateY(0) scale(1);
-    filter: blur(0);
   }
   100% {
-    opacity: 0.42;
-    transform: translateY(-60px) scale(0.99);
-    filter: blur(2px);
+    opacity: 0.78;
+    transform: translateY(-32px) scale(0.996);
   }
 }
 
