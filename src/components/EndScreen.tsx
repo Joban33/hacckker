@@ -11,10 +11,28 @@ const SIMULATED_NODE_DATA = {
 };
 
 export const EndScreen: React.FC = () => {
-  const ipData = SIMULATED_NODE_DATA;
+  const [ipData, setIpData] = useState<any>(SIMULATED_NODE_DATA);
   const [stage, setStage] = useState(0); // 0: hidden, 1: gathering, 2: hacked
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
+  useEffect(() => {
+    fetch('https://ipapi.co/json/')
+      .then(res => res.json())
+      .then(data => {
+        if (!data.error) {
+          setIpData({
+            ip: data.ip,
+            city: data.city,
+            region: data.region,
+            country: data.country_name || data.country,
+            lat: data.latitude,
+            lon: data.longitude,
+          });
+        }
+      })
+      .catch(err => console.error('Failed to fetch IP data:', err));
+  }, []);
 
   useEffect(() => {
     if (isInView) {
