@@ -17,15 +17,15 @@ export const EndScreen: React.FC = () => {
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   useEffect(() => {
-    fetch('https://ipapi.co/json/')
+    fetch('https://ipwho.is/')
       .then(res => res.json())
       .then(data => {
-        if (!data.error) {
+        if (data.success) {
           setIpData({
             ip: data.ip,
             city: data.city,
             region: data.region,
-            country: data.country_name || data.country,
+            country: data.country,
             lat: data.latitude,
             lon: data.longitude,
           });
