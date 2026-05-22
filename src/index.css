@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lalezar&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-geist: "Geist", sans-serif;
+  --font-averia: "Averia Serif Libre", serif;
+  --font-lalezar: "Lalezar", cursive;
+  --color-matrix: #1ac91d;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #000000;
+  color: #ffffff;
+  font-family: var(--font-geist);
+  overflow-x: hidden;
+}
+
+/* Shared marquee keyframe — both layers use translateX(-50%) */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Legacy alias kept for compatibility */
+.animate-ticker {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee 40s linear infinite;
+}
+
+/* Slow cinematic marquee for the giant foreground typography */
+.animate-marquee-slow {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee 55s linear infinite;
+  will-change: transform;
+}
+
+/* Smooth fade-in utility */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
