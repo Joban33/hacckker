@@ -1,73 +1,109 @@
-# React + TypeScript + Vite
+# BLACKSIGNAL Protocol
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A cinematic hacker-style portfolio interface built with React, TypeScript, Vite, Tailwind CSS, Framer Motion, GSAP, and Lenis.
 
-Currently, two official plugins are available:
+Live site: [hacckker.vercel.app](https://hacckker.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Overview
 
-## React Compiler
+BLACKSIGNAL Protocol is a scroll-driven, HUD-inspired web experience. The site presents a portfolio as a sequence of system phases: core boot, identity recognition, memory archive, distortion chamber, system logs, final transaction, and breach finale.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The design language is intentionally sharp, monochrome, and terminal-like, with acid-lime telemetry, hard panel borders, scanlines, glitch layers, scroll-reactive indicators, and hover-driven reveal mechanics.
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Cinematic loading sequence and scroll-controlled page progression.
+- Fixed navigation with active section tracking.
+- Scroll phase telemetry rail for desktop viewports.
+- Fluid hover reveal on the hero portrait.
+- Animated archive, distortion, protocol, and transaction panels.
+- Mobile-specific layout overrides for dense HUD sections.
+- Local deterministic visual noise, avoiding fragile remote texture dependencies.
+- No live IP lookup or external tracking dependency in the finale.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS 4
+- Framer Motion
+- GSAP
+- Lenis smooth scrolling
+- Lucide React icons
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Getting Started
+
+Install dependencies:
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Run the development server:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+Build for production:
+
+```bash
+npm run build
+```
+
+Run lint checks:
+
+```bash
+npm run lint
+```
+
+Preview the production build locally:
+
+```bash
+npm run preview
+```
+
+## Project Structure
+
+```text
+src/
+  App.tsx
+  index.css
+  components/
+    BackgroundContent.tsx
+    DistortionChamber.tsx
+    EndScreen.tsx
+    FinalTransaction.tsx
+    HoverMaskReveal.tsx
+    InteractiveWaveBackground.tsx
+    LoadingScreen.tsx
+    MemoryFragments.tsx
+    Navi.tsx
+    ScrollPhaseTelemetry.tsx
+    SignalRecognition.tsx
+    SystemDescent.tsx
+```
+
+## Design Notes
+
+The design system is documented in [design.md](./design.md). Keep new UI aligned with the existing BLACKSIGNAL language:
+
+- sharp typography
+- dark system panels
+- acid-lime telemetry highlights
+- low-noise glitch and scanline effects
+- motion that feels like instrument feedback, not decorative animation
+
+Avoid generic SaaS sections, rounded card-heavy layouts, unrelated gradients, and soft decorative blobs.
+
+## Quality Checks
+
+Before pushing changes, run:
+
+```bash
+npm run lint
+npm run build
+```
+
+The production build may warn about a large JavaScript chunk. That is expected for the current single-page animation-heavy build, but future work should consider route or component-level code splitting if the project grows.

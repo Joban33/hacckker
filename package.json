@@ -1,5 +1,6 @@
 {
   "name": "hacker",
+  "description": "Cinematic hacker-style portfolio interface with scroll-driven HUD phases, glitch motion, and fluid hover reveals.",
   "private": true,
   "version": "0.0.0",
   "type": "module",
