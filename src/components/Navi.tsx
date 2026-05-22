@@ -14,7 +14,7 @@ export const Navi: React.FC = () => {
   const [hoveredIndex, setHoveredIndex] = useState<string | null>(null);
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-black/40 backdrop-blur-md border-b border-white/10 py-3 px-6 md:px-8 flex flex-col md:flex-row items-start md:items-center justify-between font-geist uppercase tracking-widest text-zinc-400">
+    <header className="fixed top-0 left-0 w-full z-50 bg-black/40 backdrop-blur-md border-b border-white/10 py-3 px-4 md:px-8 flex flex-col md:flex-row items-start md:items-center justify-between font-geist uppercase tracking-widest text-zinc-400 overflow-hidden">
       
       {/* LEFT: Branding */}
       <div className="flex items-center space-x-4 select-none mb-4 md:mb-0">
@@ -29,7 +29,7 @@ export const Navi: React.FC = () => {
       </div>
 
       {/* RIGHT: Navigation Links */}
-      <nav className="flex flex-wrap items-center gap-1 md:gap-2">
+      <nav className="flex items-center gap-1 md:gap-2 w-full md:w-auto overflow-x-auto whitespace-nowrap pb-1 md:pb-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
         {NAV_ITEMS.map((item) => (
           <motion.a
             key={item.id}

@@ -83,7 +83,7 @@ export const HoverMaskReveal: React.FC<HoverMaskRevealProps> = ({
         <img
           src={baseImageSrc}
           alt="Hacker Portrait Base"
-          className="absolute inset-0 w-full h-full object-contain pointer-events-none z-10"
+          className="absolute inset-0 w-full h-full object-contain object-bottom pointer-events-none z-10"
           draggable="false"
         />
 
@@ -99,7 +99,7 @@ export const HoverMaskReveal: React.FC<HoverMaskRevealProps> = ({
           <img
             src={hoverImageSrc}
             alt="Hacker Portrait Hover Reveal"
-            className="w-full h-full object-contain pointer-events-none"
+            className="w-full h-full object-contain object-bottom pointer-events-none"
             draggable="false"
           />
         </motion.div>

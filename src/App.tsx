@@ -93,8 +93,8 @@ function App() {
               <BackgroundContent />
 
               {/* 4. Hacker Portrait overlapping text (z-30, free-floating, overflow-visible) */}
-              <main className="absolute inset-0 z-30 flex items-center justify-center pointer-events-none overflow-visible">
-                <div className="h-[80vh] md:h-[88vh] aspect-[16/9] pointer-events-auto overflow-visible flex items-center justify-center transform translate-y-[7vh] md:translate-y-[9vh]">
+              <main className="absolute inset-0 z-30 flex items-center justify-center pointer-events-none overflow-visible w-full px-4 md:px-0">
+                <div className="h-[60vh] sm:h-[80vh] md:h-[88vh] w-full md:w-auto md:aspect-[16/9] pointer-events-auto overflow-visible flex items-center justify-center transform translate-y-[5vh] md:translate-y-[9vh]">
                   <HoverMaskReveal
                     baseImageSrc="/base_hacker.png"
                     hoverImageSrc="/hover_hacker.png"
