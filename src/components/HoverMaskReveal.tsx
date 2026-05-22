@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform, useVelocity } from 'framer-motion';
 
 interface HoverMaskRevealProps {
   baseImageSrc?: string;
@@ -23,6 +23,8 @@ export const HoverMaskReveal: React.FC<HoverMaskRevealProps> = ({
   const springConfig = { stiffness: 120, damping: 22, mass: 0.8 };
   const smoothX = useSpring(mouseX, springConfig);
   const smoothY = useSpring(mouseY, springConfig);
+  const velocityX = useVelocity(smoothX);
+  const velocityY = useVelocity(smoothY);
   
   // Animate the mask circle radius from 0 to 220px and opacity from 0 to 1 on hover
   const maskRadius = useMotionValue(0);
@@ -55,10 +57,24 @@ export const HoverMaskReveal: React.FC<HoverMaskRevealProps> = ({
     setIsHovered(false);
   };
 
-  // Convert raw coords into CSS radial-gradient for a smooth, fluid spotlight mask.
+  // Multi-lobed mask: a dense core with velocity-driven trailing pockets.
   const maskImage = useTransform(
-    [smoothX, smoothY, smoothRadius],
-    ([x, y, r]) => `radial-gradient(circle ${r}px at ${x}px ${y}px, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 100%)`
+    [smoothX, smoothY, smoothRadius, velocityX, velocityY],
+    (latest) => {
+      const [x, y, r, vx, vy] = latest as number[];
+      const velocity = Math.min(1, Math.hypot(vx, vy) / 900);
+      const trailX = Math.max(-90, Math.min(90, vx * 0.08));
+      const trailY = Math.max(-90, Math.min(90, vy * 0.08));
+      const stretchX = r * (1.05 + velocity * 0.7);
+      const stretchY = r * (0.62 + velocity * 0.18);
+
+      return [
+        `radial-gradient(ellipse ${stretchX}px ${stretchY}px at ${x}px ${y}px, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 34%, rgba(0,0,0,0.7) 54%, rgba(0,0,0,0) 78%)`,
+        `radial-gradient(circle ${r * 0.46}px at ${x - trailX}px ${y - trailY}px, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.42) 54%, rgba(0,0,0,0) 86%)`,
+        `radial-gradient(circle ${r * 0.32}px at ${x + trailY * 0.55}px ${y - trailX * 0.45}px, rgba(0,0,0,0.74) 0%, rgba(0,0,0,0) 78%)`,
+        `radial-gradient(circle ${r * 0.24}px at ${x - trailY * 0.75}px ${y + trailX * 0.55}px, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0) 80%)`,
+      ].join(', ');
+    }
   );
 
   return (
@@ -100,6 +116,10 @@ export const HoverMaskReveal: React.FC<HoverMaskRevealProps> = ({
             src={hoverImageSrc}
             alt="Hacker Portrait Hover Reveal"
             className="w-full h-full object-contain object-bottom pointer-events-none"
+            style={{
+              transform: 'translate3d(-0.82%, 0.29%, 0) scale3d(0.982, 0.994, 1)',
+              transformOrigin: 'center bottom',
+            }}
             draggable="false"
           />
         </motion.div>

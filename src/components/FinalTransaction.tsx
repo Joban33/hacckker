@@ -4,6 +4,15 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const NODE_BARS = Array.from({ length: 15 }, (_, index) => ({
+  delay: ((index * 0.09) % 1).toFixed(2),
+}));
+
+const INTEGRITY_BARS = Array.from({ length: 40 }, (_, index) => ({
+  opacity: 0.5 + ((index * 17) % 50) / 100,
+  delay: ((index * 0.11) % 2).toFixed(2),
+}));
+
 export const FinalTransaction: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -158,14 +167,14 @@ export const FinalTransaction: React.FC = () => {
                 <div className="text-[12px] text-white/80 tracking-widest">NODE 7A21</div>
                 <div className="text-[8px] text-[#d4ff00] tracking-widest">ENCRYPTED</div>
                 <div className="flex items-end gap-1 mt-2 h-4">
-                  {[...Array(15)].map((_, i) => (
+                  {NODE_BARS.map((bar, i) => (
                     <div 
                       key={i} 
                       className={`w-0.5 origin-bottom ${i < 13 ? 'bg-[#d4ff00]/80' : 'bg-white/10'}`} 
                       style={{ 
                         height: '100%', 
                         animation: 'pulseHeight 0.4s ease-in-out infinite alternate', 
-                        animationDelay: `${Math.random()}s` 
+                        animationDelay: `${bar.delay}s`
                       }} 
                     />
                   ))}
@@ -179,14 +188,14 @@ export const FinalTransaction: React.FC = () => {
                 <div className="text-[12px] text-white/80 tracking-widest">NODE C04F</div>
                 <div className="text-[8px] text-[#d4ff00] tracking-widest">ENCRYPTED</div>
                 <div className="flex items-end justify-end gap-1 mt-2 h-4">
-                  {[...Array(15)].map((_, i) => (
+                  {NODE_BARS.map((bar, i) => (
                     <div 
                       key={i} 
                       className={`w-0.5 origin-bottom ${i < 12 ? 'bg-[#d4ff00]/80' : 'bg-white/10'}`} 
                       style={{ 
                         height: '100%', 
                         animation: 'pulseHeight 0.4s ease-in-out infinite alternate', 
-                        animationDelay: `${Math.random()}s` 
+                        animationDelay: `${bar.delay}s`
                       }} 
                     />
                   ))}
@@ -200,14 +209,14 @@ export const FinalTransaction: React.FC = () => {
             <div className="border border-white/5 bg-black/40 p-4 absolute bottom-8 left-1/2 -translate-x-1/2 w-[60%]">
               <div className="text-[8px] tracking-widest text-white/40 uppercase mb-4">TRANSMISSION INTEGRITY</div>
               <div className="flex items-center gap-1 mb-2 h-3">
-                 {[...Array(40)].map((_, i) => (
+                 {INTEGRITY_BARS.map((bar, i) => (
                     <div 
                       key={i} 
                       className="flex-1 h-full bg-[#d4ff00]/80" 
                       style={{ 
-                        opacity: 0.5 + Math.random() * 0.5,
+                        opacity: bar.opacity,
                         animation: 'blinkTerminal 2s infinite alternate',
-                        animationDelay: `${Math.random() * 2}s`
+                        animationDelay: `${bar.delay}s`
                       }} 
                     />
                  ))}

@@ -55,15 +55,15 @@ export const BackgroundContent: React.FC = () => {
             <React.Fragment key={idx}>
               <span
                 className="
-                  font-averia
-                  font-extrabold
-                  text-[14vw]
-                  leading-[0.88]
-                  tracking-[-0.01em]
+                  font-geist
+                  font-black
+                  text-[13vw] sm:text-[12vw] md:text-[11vw]
+                  leading-[0.82]
+                  tracking-[0.08em]
                   text-white
                   opacity-100
                   uppercase
-                  px-[1.5vw]
+                  px-[1.3vw]
                 "
               >
                 {word}

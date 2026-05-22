@@ -1,12 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lalezar&display=swap');
 
 @import "tailwindcss";
 
 @theme {
   --font-geist: "Geist", sans-serif;
-  --font-averia: "Averia Serif Libre", serif;
   --font-lalezar: "Lalezar", cursive;
   --color-matrix: #1ac91d;
 }
@@ -52,5 +50,101 @@ html, body, #root {
 @keyframes fadeIn {
   to {
     opacity: 1;
+  }
+}
+
+@media (max-width: 767px) {
+  header.fixed {
+    padding: 0.75rem 1rem !important;
+  }
+
+  section#core_sys {
+    min-height: 100svh !important;
+    height: 100svh !important;
+    padding-top: 5rem !important;
+  }
+
+  section#core_sys main > div {
+    height: 68svh !important;
+    transform: translateY(6svh) !important;
+  }
+
+  section#identity,
+  section#archives,
+  section#protocols,
+  section#sys_logs,
+  section#transmit {
+    display: block !important;
+    min-height: 100svh !important;
+    height: auto !important;
+    overflow: visible !important;
+    padding-top: 4.25rem !important;
+  }
+
+  section#identity > div:first-of-type,
+  section#archives > div:nth-of-type(2),
+  section#protocols > div:first-of-type,
+  section#transmit > div:first-of-type {
+    display: none !important;
+  }
+
+  section#identity > div:nth-of-type(2),
+  section#archives > div:nth-of-type(3),
+  section#protocols > div:nth-of-type(2),
+  section#transmit > div:nth-of-type(2) {
+    min-height: 100svh !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  section#identity .flex-1.flex.overflow-hidden,
+  section#archives .flex-1.flex.overflow-hidden,
+  section#protocols .flex-1.flex.overflow-hidden,
+  section#transmit .flex-1.flex.overflow-hidden {
+    flex-direction: column !important;
+    overflow: visible !important;
+  }
+
+  section#identity [class*="w-[380px]"],
+  section#identity [class*="w-[350px]"],
+  section#archives [class*="w-[380px]"],
+  section#protocols [class*="w-[450px]"],
+  section#protocols [class*="w-[350px]"],
+  section#transmit [class*="w-[380px]"],
+  section#transmit [class*="w-[350px]"] {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  section#protocols [class*="absolute right-0"],
+  section#transmit [class*="absolute right-0"] {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+  }
+
+  section#identity [class*="h-[160px]"][class*="border-t"],
+  section#archives [class*="h-[140px]"][class*="border-t"],
+  section#transmit [class*="h-[220px]"][class*="border-t"] {
+    display: none !important;
+  }
+
+  section#protocols [class*="h-[60px]"][class*="border-t"] {
+    display: none !important;
+  }
+
+  section#identity [class*="p-8"],
+  section#archives [class*="p-8"],
+  section#protocols [class*="p-8"],
+  section#transmit [class*="p-8"] {
+    padding: 1.25rem !important;
+  }
+
+  section#identity [class*="font-lalezar"],
+  section#archives [class*="font-lalezar"],
+  section#protocols [class*="font-lalezar"],
+  section#transmit [class*="font-lalezar"] {
+    font-size: clamp(3rem, 16vw, 4.8rem) !important;
+    line-height: 0.88 !important;
   }
 }

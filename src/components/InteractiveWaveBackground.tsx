@@ -35,14 +35,14 @@ function createNoise2D(seed = 0.5) {
   ]);
   
   return function noise2D(xin: number, yin: number) {
-    let s = (xin + yin) * F2;
-    let i = Math.floor(xin + s) | 0;
-    let j = Math.floor(yin + s) | 0;
-    let t = (i + j) * G2;
-    let X0 = i - t;
-    let Y0 = j - t;
-    let x0 = xin - X0;
-    let y0 = yin - Y0;
+    const s = (xin + yin) * F2;
+    const i = Math.floor(xin + s) | 0;
+    const j = Math.floor(yin + s) | 0;
+    const t = (i + j) * G2;
+    const X0 = i - t;
+    const Y0 = j - t;
+    const x0 = xin - X0;
+    const y0 = yin - Y0;
     
     let i1, j1;
     if (x0 > y0) {
@@ -53,16 +53,16 @@ function createNoise2D(seed = 0.5) {
       j1 = 1;
     }
     
-    let x1 = x0 - i1 + G2;
-    let y1 = y0 - j1 + G2;
-    let x2 = x0 - 1.0 + G22;
-    let y2 = y0 - 1.0 + G22;
+    const x1 = x0 - i1 + G2;
+    const y1 = y0 - j1 + G2;
+    const x2 = x0 - 1.0 + G22;
+    const y2 = y0 - 1.0 + G22;
     
-    let ii = i & 255;
-    let jj = j & 255;
-    let gi0 = permMod12[ii + perm[jj]];
-    let gi1 = permMod12[ii + i1 + perm[jj + j1]];
-    let gi2 = permMod12[ii + 1 + perm[jj + 1]];
+    const ii = i & 255;
+    const jj = j & 255;
+    const gi0 = permMod12[ii + perm[jj]];
+    const gi1 = permMod12[ii + i1 + perm[jj + j1]];
+    const gi2 = permMod12[ii + 1 + perm[jj + 1]];
     
     let t0 = 0.5 - x0 * x0 - y0 * y0;
     let n0 = 0;
@@ -359,7 +359,7 @@ export const InteractiveWaveBackground: React.FC<InteractiveWaveBackgroundProps>
         cancelAnimationFrame(rafIdRef.current);
       }
     };
-  }, [waveSpeed, waveAmplitude, mouseInfluence]);
+  }, [waveSpeed, waveAmplitude, mouseInfluence, preview]);
 
   return (
     <div

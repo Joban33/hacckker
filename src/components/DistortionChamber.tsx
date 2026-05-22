@@ -4,6 +4,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const SYNC_BAR_DELAYS = Array.from({ length: 20 }, (_, index) => ((index * 0.07) % 0.5).toFixed(2));
+const VISUALIZER_BARS = Array.from({ length: 60 }, (_, index) => ({
+  height: 24 + ((index * 37) % 72),
+  delay: ((index * 0.043) % 1).toFixed(2),
+  duration: (0.18 + (index % 5) * 0.04).toFixed(2),
+}));
+
 export const DistortionChamber: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -19,10 +26,37 @@ export const DistortionChamber: React.FC = () => {
     >
       <style>{`
         @keyframes glitchImage {
-          0%, 100% { transform: translate(0, 0) scale(1); filter: contrast(150%) hue-rotate(0deg); }
-          2% { transform: translate(-5px, 2px) scale(1.02); filter: contrast(180%) hue-rotate(-20deg); }
-          4% { transform: translate(5px, -2px) scale(1); filter: contrast(150%) hue-rotate(20deg); }
-          6% { transform: translate(0, 0) scale(1); filter: contrast(150%) hue-rotate(0deg); }
+          0%, 100% { transform: translate3d(-14px, -8px, 0) scale(1.04); filter: grayscale(1) contrast(150%) brightness(0.85) hue-rotate(0deg); }
+          18% { transform: translate3d(10px, -16px, 0) scale(1.075); filter: grayscale(1) contrast(165%) brightness(1) hue-rotate(-8deg); }
+          34% { transform: translate3d(18px, 8px, 0) scale(1.055); filter: grayscale(1) contrast(185%) brightness(0.9) hue-rotate(12deg); }
+          36% { transform: translate3d(-22px, 2px, 0) scale(1.09) skewX(1.2deg); filter: grayscale(1) contrast(230%) brightness(1.15) hue-rotate(-18deg); }
+          38% { transform: translate3d(12px, -4px, 0) scale(1.06) skewX(-0.8deg); filter: grayscale(1) contrast(170%) brightness(0.95) hue-rotate(18deg); }
+          62% { transform: translate3d(-8px, 14px, 0) scale(1.085); filter: grayscale(1) contrast(160%) brightness(0.82) hue-rotate(6deg); }
+          78% { transform: translate3d(16px, 2px, 0) scale(1.045); filter: grayscale(1) contrast(180%) brightness(1.05) hue-rotate(-12deg); }
+        }
+        @keyframes spectralSplitA {
+          0%, 100% { transform: translate3d(-26px, -6px, 0) scale(1.06); opacity: 0.1; clip-path: inset(12% 0 58% 0); }
+          28% { transform: translate3d(24px, -12px, 0) scale(1.08); opacity: 0.2; clip-path: inset(20% 0 42% 0); }
+          54% { transform: translate3d(-18px, 10px, 0) scale(1.1); opacity: 0.14; clip-path: inset(42% 0 22% 0); }
+          76% { transform: translate3d(30px, 4px, 0) scale(1.07); opacity: 0.24; clip-path: inset(8% 0 68% 0); }
+        }
+        @keyframes spectralSplitB {
+          0%, 100% { transform: translate3d(24px, 8px, 0) scale(1.05); opacity: 0.09; clip-path: inset(55% 0 16% 0); }
+          22% { transform: translate3d(-16px, 14px, 0) scale(1.08); opacity: 0.18; clip-path: inset(36% 0 31% 0); }
+          48% { transform: translate3d(28px, -8px, 0) scale(1.07); opacity: 0.12; clip-path: inset(66% 0 8% 0); }
+          82% { transform: translate3d(-24px, 0, 0) scale(1.1); opacity: 0.22; clip-path: inset(18% 0 48% 0); }
+        }
+        @keyframes interferenceSweep {
+          0% { transform: translateY(-140%) skewY(-4deg); opacity: 0; }
+          18% { opacity: 0.65; }
+          50% { opacity: 0.35; }
+          100% { transform: translateY(150%) skewY(4deg); opacity: 0; }
+        }
+        @keyframes distortionBands {
+          0%, 100% { transform: translateX(-18px); opacity: 0.3; }
+          25% { transform: translateX(24px); opacity: 0.55; }
+          50% { transform: translateX(-8px); opacity: 0.22; }
+          75% { transform: translateX(34px); opacity: 0.48; }
         }
         @keyframes textGlitch {
           0%, 100% { transform: translateX(0); opacity: 1; }
@@ -92,10 +126,15 @@ export const DistortionChamber: React.FC = () => {
           {/* CENTER BACKGROUND (The Glitched Face) */}
           <div className="absolute inset-0 flex items-center justify-center z-0 opacity-40">
             {/* CSS Glitch Container */}
-            <div className="relative w-[600px] h-[800px]">
-              <img src="/base_hacker.png" className="absolute inset-0 w-full h-full object-cover filter grayscale contrast-150" style={{ animation: 'glitchImage 4s infinite' }} />
+            <div className="relative w-[640px] h-[820px] overflow-visible">
+              <img src="/base_hacker.png" className="absolute inset-0 w-full h-full object-cover filter grayscale contrast-150 will-change-transform" style={{ animation: 'glitchImage 6.5s ease-in-out infinite' }} />
+              <img src="/base_hacker.png" className="absolute inset-0 w-full h-full object-cover grayscale contrast-200 mix-blend-screen pointer-events-none will-change-transform" style={{ animation: 'spectralSplitA 3.4s steps(2, end) infinite', filter: 'sepia(1) saturate(5) hue-rotate(55deg)' }} />
+              <img src="/base_hacker.png" className="absolute inset-0 w-full h-full object-cover grayscale contrast-200 mix-blend-screen pointer-events-none will-change-transform" style={{ animation: 'spectralSplitB 4.1s steps(2, end) infinite', filter: 'sepia(1) saturate(5) hue-rotate(-45deg)' }} />
               {/* Fake CSS scanlines & glitch slices */}
               <div className="absolute inset-0 bg-[repeating-linear-gradient(transparent,transparent_2px,rgba(0,0,0,0.8)_3px)] pointer-events-none" />
+              <div className="absolute inset-x-[-18%] top-0 h-[180px] bg-[linear-gradient(180deg,transparent,rgba(212,255,0,0.12),rgba(255,255,255,0.08),transparent)] blur-sm mix-blend-screen pointer-events-none" style={{ animation: 'interferenceSweep 4.8s ease-in-out infinite' }} />
+              <div className="absolute inset-x-[-12%] top-[18%] h-[36px] bg-white/10 backdrop-blur-md mix-blend-overlay pointer-events-none" style={{ animation: 'distortionBands 1.6s steps(3, end) infinite' }} />
+              <div className="absolute inset-x-[-18%] top-[52%] h-[62px] bg-[#d4ff00]/10 blur-md mix-blend-screen pointer-events-none" style={{ animation: 'distortionBands 2.2s steps(4, end) infinite reverse' }} />
               <div className="absolute top-[30%] left-[-10%] right-[10%] h-[20px] bg-white/10 backdrop-blur-sm mix-blend-overlay" style={{ animation: 'sliceMove1 0.1s infinite alternate' }} />
               <div className="absolute top-[45%] left-[-5%] right-[5%] h-[10px] bg-black/50" style={{ animation: 'sliceMove2 0.15s infinite alternate' }} />
               <div className="absolute top-[60%] left-[-20%] right-[20%] h-[40px] bg-white/5 backdrop-blur-md mix-blend-screen" style={{ animation: 'sliceMove1 0.2s infinite alternate' }} />
@@ -206,7 +245,7 @@ export const DistortionChamber: React.FC = () => {
                   <div 
                     key={i} 
                     className={`flex-1 ${i < 9 ? 'bg-white/80' : 'bg-white/10'}`} 
-                    style={{ animation: 'blinkTerminal 0.5s infinite alternate', animationDelay: `${Math.random() * 0.5}s` }}
+                    style={{ animation: 'blinkTerminal 0.5s infinite alternate', animationDelay: `${SYNC_BAR_DELAYS[i]}s` }}
                   />
                 ))}
               </div>
@@ -254,14 +293,14 @@ export const DistortionChamber: React.FC = () => {
            
            {/* Visualizer bars */}
            <div className="flex-1 flex items-center gap-[2px] h-4 mx-8">
-             {[...Array(60)].map((_, i) => (
+             {VISUALIZER_BARS.map((bar, i) => (
                <div 
                  key={i} 
                  className={`w-[3px] origin-bottom ${i < 45 ? 'bg-[#d4ff00]' : 'bg-white/10'}`} 
                  style={{ 
-                   height: `${Math.random() * 80 + 20}%`,
-                   animation: 'audioVisualizer 0.2s ease-in-out infinite alternate',
-                   animationDelay: `${Math.random()}s`
+                   height: `${bar.height}%`,
+                   animation: `audioVisualizer ${bar.duration}s ease-in-out infinite alternate`,
+                   animationDelay: `${bar.delay}s`
                  }} 
                />
              ))}

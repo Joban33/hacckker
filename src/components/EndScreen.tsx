@@ -21,7 +21,7 @@ export const EndScreen: React.FC = () => {
           lat: data.latitude || 0,
           lon: data.longitude || 0
         });
-      } catch (err) {
+      } catch {
         setIpData({ ip: '192.168.1.1', city: 'UNKNOWN_CITY', region: 'UNKNOWN_REGION', country: 'UNKNOWN_COUNTRY', lat: 0, lon: 0 });
       }
     };
