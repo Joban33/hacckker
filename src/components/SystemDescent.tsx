@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -74,7 +73,7 @@ export const SystemDescent: React.FC = () => {
       {/* ─────────────────────────────────────────────────────────────
           2. LEFT SIDEBAR
       ────────────────────────────────────────────────────────────── */}
-      <div className="w-[80px] h-full border-r border-white/5 flex flex-col items-center py-8 z-20 shrink-0 bg-black/20 backdrop-blur-sm">
+      <div className="hidden md:flex w-[80px] h-full border-r border-white/5 flex-col items-center py-8 z-20 shrink-0 bg-black/20 backdrop-blur-sm">
         <div className="text-xl font-light text-white/40 mb-12">*</div>
         <div className="flex flex-col items-center space-y-2 mb-12">
           <div className="text-[#d4ff00] font-semibold text-lg leading-none">03</div>
@@ -97,22 +96,22 @@ export const SystemDescent: React.FC = () => {
       <div className="flex-1 flex flex-col h-full relative z-20">
         
         {/* TOP HEADER */}
-        <div className="w-full h-[60px] border-b border-white/5 flex items-center justify-between px-8 text-[10px] tracking-widest text-white/40 uppercase shrink-0 bg-black/20 backdrop-blur-sm">
-          <div>BLACKSIGNAL PROTOCOL <span className="text-white/20 ml-4">V.3.7.2</span></div>
-          <div className="text-white/20">—— [ 03 ] ——</div>
+        <div className="w-full h-auto min-h-[60px] py-4 border-b border-white/5 flex flex-wrap items-center justify-between gap-2 px-4 md:px-8 text-[8px] md:text-[10px] tracking-widest text-white/40 uppercase shrink-0 bg-black/20 backdrop-blur-sm">
+          <div>BLACKSIGNAL PROTOCOL <span className="text-white/20 ml-2 md:ml-4">V.3.7.2</span></div>
+          <div className="text-white/20 hidden sm:block">—— [ 03 ] ——</div>
           <div>SYSTEM DESCENT <span className="text-white/20 ml-2">// 03</span></div>
         </div>
 
         {/* MAIN 3D HUD LAYOUT */}
-        <div className="flex-1 relative overflow-hidden flex flex-col justify-between p-8" style={{ perspective: '1200px' }}>
+        <div className="flex-1 relative overflow-y-auto overflow-x-hidden flex flex-col justify-start p-4 md:p-8 space-y-8 md:space-y-0" style={{ perspective: '1200px' }}>
           
           {/* Top Info Bar */}
-          <div className="flex justify-between items-start z-30">
+          <div className="flex flex-col xl:flex-row justify-between items-start gap-8 xl:gap-0 z-30">
             <div>
-              <p className="text-[10px] tracking-[0.2em] text-white/40 mb-4 uppercase">
+              <p className="text-[8px] md:text-[10px] tracking-[0.2em] text-white/40 mb-2 md:mb-4 uppercase">
                 DESCENDING THROUGH THE ARCHITECTURE.
               </p>
-              <h2 className="font-lalezar text-[5rem] leading-[0.85] text-white/90 tracking-wider mb-2">
+              <h2 className="font-mono font-bold text-5xl md:text-[5rem] leading-[0.85] text-white/90 tracking-[0.2em] md:tracking-[0.3em] mb-4 md:mb-6 uppercase drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
                 SYSTEM
                 <br />
                 DESCENT
@@ -122,20 +121,20 @@ export const SystemDescent: React.FC = () => {
               </p>
             </div>
 
-            <div className="flex gap-12">
-              <div className="space-y-2 text-[8px] tracking-widest uppercase">
-                <div className="flex justify-between w-[200px]"><span className="text-white/40">DESCENT ID:</span><span className="text-white/80">DS-0934-A</span></div>
+            <div className="flex flex-col md:flex-row gap-6 md:gap-12 w-full">
+              <div className="space-y-2 text-[8px] tracking-widest uppercase w-full md:w-auto">
+                <div className="flex justify-between w-full md:w-[200px]"><span className="text-white/40">DESCENT ID:</span><span className="text-white/80">DS-0934-A</span></div>
                 <div className="flex justify-between w-[200px]"><span className="text-white/40">ENTRY POINT:</span><span className="text-white/80">SURFACE INTERFACE</span></div>
                 <div className="flex justify-between w-[200px]"><span className="text-white/40">CURRENT LAYER:</span><span className="text-[#d4ff00]">LAYER 04 / 07</span></div>
                 <div className="flex justify-between w-[200px]"><span className="text-white/40">ARCHITECTURE:</span><span className="text-white/80">DISTRIBUTED</span></div>
                 <div className="flex justify-between w-[200px]"><span className="text-white/40">STABILITY:</span><span className="text-white/80">UNSTABLE</span></div>
                 <div className="flex justify-between w-[200px]"><span className="text-white/40">LATENCY:</span><span className="text-white/80">87.36 MS</span></div>
-                <div className="flex justify-between w-[200px]"><span className="text-white/40">THREAT LEVEL:</span><span className="text-white/80">ELEVATED</span></div>
-                <div className="flex justify-between w-[200px] items-center"><span className="text-white/40">SIGNAL CLARITY:</span><div className="flex-1 mx-2 h-1 bg-white/10"><div className="w-[48%] h-full bg-white/40" style={{ animation: 'blinkTerminal 2s infinite' }}/></div><span className="text-white/80">48%</span></div>
+                <div className="flex justify-between w-full md:w-[200px]"><span className="text-white/40">THREAT LEVEL:</span><span className="text-white/80">ELEVATED</span></div>
+                <div className="flex justify-between w-full md:w-[200px] items-center"><span className="text-white/40">SIGNAL CLARITY:</span><div className="flex-1 mx-2 h-1 bg-white/10"><div className="w-[48%] h-full bg-white/40" style={{ animation: 'blinkTerminal 2s infinite' }}/></div><span className="text-white/80">48%</span></div>
               </div>
 
               {/* Descent Progress Graph */}
-              <div className="border border-white/5 bg-black/40 p-4 w-[300px]">
+              <div className="border border-white/5 bg-black/40 p-4 w-full md:w-[300px]">
                 <div className="text-[8px] tracking-widest text-white/40 uppercase mb-4">DESCENT PROGRESS</div>
                 <div className="h-[60px] flex items-end gap-[2px] opacity-70">
                   {/* Fake jagged line chart */}
@@ -162,7 +161,7 @@ export const SystemDescent: React.FC = () => {
           </div>
 
           {/* FLOATING 3D TERMINAL PANELS */}
-          <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+          <div className="absolute inset-0 pointer-events-none hidden md:flex items-center justify-center">
             
             {/* Terminal 1 (Left) */}
             <div className="absolute left-[15%] top-[40%] w-[250px] border border-white/10 bg-black/60 backdrop-blur-sm p-4 shadow-[0_0_20px_rgba(0,0,0,0.8)]" style={{ animation: 'floatTerminal 5s ease-in-out infinite alternate', transformStyle: 'preserve-3d' }}>
@@ -218,7 +217,7 @@ export const SystemDescent: React.FC = () => {
         </div>
 
         {/* BOTTOM ROW (Status Panels) */}
-        <div className="h-[140px] border-t border-white/5 flex px-8 shrink-0 bg-black/60 backdrop-blur-md z-30">
+        <div className="h-auto md:h-[140px] border-t border-white/5 flex flex-col md:flex-row px-4 md:px-8 shrink-0 bg-black/60 backdrop-blur-md z-30">
           
           {/* Panel 1: Layer Map */}
           <div className="flex-[1.5] border-r border-white/5 py-4 pr-6 relative">
@@ -245,7 +244,7 @@ export const SystemDescent: React.FC = () => {
           </div>
 
           {/* Panel 2: System Log */}
-          <div className="flex-[2] border-r border-white/5 py-4 px-6 relative">
+          <div className="flex-[2] md:border-r border-white/5 py-4 md:px-6 relative border-b md:border-b-0">
              <div className="text-[8px] text-white/40 tracking-widest uppercase mb-3">System Log</div>
              <div className="space-y-2 text-[8px] tracking-widest">
                 <div className="flex justify-between"><span className="text-white/40">{'>'} INITIALIZING DESCENT SEQUENCE...</span><span className="text-white/60">COMPLETE</span></div>
@@ -278,9 +277,9 @@ export const SystemDescent: React.FC = () => {
         </div>
 
         {/* BOTTOM FOOTER */}
-        <div className="h-[40px] border-t border-white/5 flex items-center justify-between px-8 text-[8px] tracking-[0.3em] text-white/30 uppercase shrink-0 bg-black/80 backdrop-blur-md z-30">
-          <div className="flex items-center gap-4">
-            <div>[</div>
+        <div className="h-auto min-h-[40px] py-4 md:py-0 border-t border-white/5 flex flex-col md:flex-row items-center justify-between px-4 md:px-8 gap-4 md:gap-0 text-[7px] md:text-[8px] tracking-[0.2em] md:tracking-[0.3em] text-white/30 uppercase shrink-0 bg-black/80 backdrop-blur-md z-30 text-center">
+          <div className="flex items-center gap-2 md:gap-4">
+            <div className="hidden md:block">[</div>
             <div>BLACKSIGNAL PROTOCOL // END OF TRANSMISSION</div>
           </div>
           <div className="flex items-center gap-4">
