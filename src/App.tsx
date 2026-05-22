@@ -11,6 +11,7 @@ import DistortionChamber from './components/DistortionChamber';
 import SystemDescent from './components/SystemDescent';
 import FinalTransaction from './components/FinalTransaction';
 import LoadingScreen from './components/LoadingScreen';
+import EndScreen from './components/EndScreen';
 
 // --- Placeholder for cursor blob if needed ---
 const CursorBlob = () => {
@@ -141,6 +142,13 @@ function App() {
             ───────────────────────────────────────────────────────── */}
             <div id="transmit">
               <FinalTransaction />
+            </div>
+
+            {/* ─────────────────────────────────────────────────────────
+                SECTION 7: GRAND FINALE (End Screen)
+            ───────────────────────────────────────────────────────── */}
+            <div id="hacked">
+              <EndScreen />
             </div>
 
           </motion.div>
