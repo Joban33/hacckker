@@ -18,6 +18,9 @@ export const SignalRecognition: React.FC = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      const scoped = gsap.utils.selector(sectionRef);
+      const pulseNodes = scoped('.pulse-node');
+
       // Subtle pulse and scanline effects
       gsap.to('.scanline-fx', {
         y: '100%',
@@ -25,12 +28,15 @@ export const SignalRecognition: React.FC = () => {
         repeat: -1,
         ease: 'none',
       });
-      gsap.to('.pulse-node', {
-        opacity: 0.2,
-        duration: 0.5,
-        repeat: -1,
-        yoyo: true,
-      });
+      if (pulseNodes.length) {
+        gsap.to(pulseNodes, {
+          opacity: 0.2,
+          duration: 0.5,
+          repeat: -1,
+          yoyo: true,
+          stagger: 0.12,
+        });
+      }
     }, sectionRef);
     return () => ctx.revert();
   }, []);
@@ -152,7 +158,7 @@ export const SignalRecognition: React.FC = () => {
                 <div className="flex"><span className="w-[140px] text-white/40">CLEARANCE:</span><span className="text-white/80">RESTRICTED</span></div>
                 <div className="flex"><span className="w-[140px] text-white/40">SIGNAL ID:</span><span className="text-white/80">BS-7A21-X9F</span></div>
                 <div className="flex"><span className="w-[140px] text-white/40">FIRST DETECTED:</span><span className="text-white/80">10.12.2023</span></div>
-                <div className="flex items-center"><span className="w-[140px] text-white/40">LAST SEEN:</span><span className="text-white/80 flex items-center gap-2">ACTIVE <span className="w-1.5 h-1.5 bg-[#d4ff00] rounded-full animate-pulse" /></span></div>
+                <div className="flex items-center"><span className="w-[140px] text-white/40">LAST SEEN:</span><span className="text-white/80 flex items-center gap-2">ACTIVE <span className="pulse-node w-1.5 h-1.5 bg-[#d4ff00] rounded-full animate-pulse" /></span></div>
               </div>
 
               <div className="mt-8 text-[8px] tracking-widest text-white/40 uppercase mb-2">NOTES:</div>
@@ -228,7 +234,7 @@ export const SignalRecognition: React.FC = () => {
               </div>
               <div className="w-16 h-16 rounded-full border border-white/10 relative flex items-center justify-center">
                 <div className="absolute w-[60%] h-[60%] rounded-full border border-white/5 border-dashed animate-[spin_4s_linear_infinite]" />
-                <div className="w-1 h-1 bg-[#d4ff00] rounded-full shadow-[0_0_8px_#d4ff00] animate-pulse" />
+                <div className="pulse-node w-1 h-1 bg-[#d4ff00] rounded-full shadow-[0_0_8px_#d4ff00] animate-pulse" />
               </div>
             </div>
             <div className="text-[7px] text-white/40 tracking-widest uppercase">STATUS: <span className="text-[#d4ff00]">MONITORING</span></div>

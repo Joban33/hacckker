@@ -1,32 +1,20 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useInView } from 'framer-motion';
 
+const SIMULATED_NODE_DATA = {
+  ip: '127.0.0.1',
+  city: 'LOCALHOST',
+  region: 'SANDBOX',
+  country: 'SIMULATED NODE',
+  lat: 0,
+  lon: 0,
+};
+
 export const EndScreen: React.FC = () => {
-  const [ipData, setIpData] = useState<{ ip?: string; city?: string; region?: string; country?: string; lat?: number; lon?: number }>({});
+  const ipData = SIMULATED_NODE_DATA;
   const [stage, setStage] = useState(0); // 0: hidden, 1: gathering, 2: hacked
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-
-  useEffect(() => {
-    // Fetch IP Data for the dramatic reveal
-    const fetchIp = async () => {
-      try {
-        const response = await fetch('https://ipapi.co/json/');
-        const data = await response.json();
-        setIpData({
-          ip: data.ip || 'UNKNOWN_IP',
-          city: data.city || 'UNKNOWN_CITY',
-          region: data.region || 'UNKNOWN_REGION',
-          country: data.country_name || 'UNKNOWN_COUNTRY',
-          lat: data.latitude || 0,
-          lon: data.longitude || 0
-        });
-      } catch {
-        setIpData({ ip: '192.168.1.1', city: 'UNKNOWN_CITY', region: 'UNKNOWN_REGION', country: 'UNKNOWN_COUNTRY', lat: 0, lon: 0 });
-      }
-    };
-    fetchIp();
-  }, []);
 
   useEffect(() => {
     if (isInView) {

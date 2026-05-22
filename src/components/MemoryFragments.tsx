@@ -135,7 +135,7 @@ export const MemoryFragments: React.FC = () => {
         {/* Deep vignette */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_0%,rgba(0,0,0,0.8)_100%)]" />
         {/* Subtle noise */}
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay" />
+        <div className="hud-noise absolute inset-0 opacity-[0.03] mix-blend-overlay" />
       </div>
 
       {/* ─────────────────────────────────────────────────────────────

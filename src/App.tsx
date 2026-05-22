@@ -12,6 +12,7 @@ import SystemDescent from './components/SystemDescent';
 import FinalTransaction from './components/FinalTransaction';
 import LoadingScreen from './components/LoadingScreen';
 import EndScreen from './components/EndScreen';
+import ScrollPhaseTelemetry from './components/ScrollPhaseTelemetry';
 
 // --- Placeholder for cursor blob if needed ---
 const CursorBlob = () => {
@@ -66,10 +67,11 @@ function App() {
           >
             {/* Global Grain Overlay (z-50) */}
             <div className="fixed inset-0 pointer-events-none z-50 mix-blend-overlay opacity-30">
-              <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.15]" />
+              <div className="hud-noise absolute inset-0 opacity-[0.15]" />
             </div>
 
             <CursorBlob />
+            <ScrollPhaseTelemetry />
             
             {/* ─────────────────────────────────────────────────────────
                 SECTION 1: HERO (Cinematic Portal)

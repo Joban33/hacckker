@@ -53,6 +53,105 @@ html, body, #root {
   }
 }
 
+@keyframes hudCharge {
+  0%, 100% {
+    opacity: 0.25;
+    transform: translateX(-20%) scaleX(0.35);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translateX(35%) scaleX(1);
+  }
+}
+
+@keyframes sectionWake {
+  0% {
+    opacity: 0.35;
+    transform: translateY(80px) scale(0.985);
+    filter: blur(4px);
+  }
+  35%,
+  70% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0.42;
+    transform: translateY(-60px) scale(0.99);
+    filter: blur(2px);
+  }
+}
+
+.hud-noise {
+  background-image:
+    radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.16) 0 1px, transparent 1px),
+    radial-gradient(circle at 72% 64%, rgba(255, 255, 255, 0.1) 0 1px, transparent 1px),
+    radial-gradient(circle at 42% 82%, rgba(212, 255, 0, 0.08) 0 1px, transparent 1px),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 3px);
+  background-size: 19px 19px, 31px 31px, 43px 43px, 100% 4px;
+}
+
+section[id] {
+  transform-origin: center center;
+}
+
+@supports (animation-timeline: view()) {
+  section#identity,
+  section#archives,
+  section#protocols,
+  section#sys_logs,
+  section#transmit {
+    animation: sectionWake both linear;
+    animation-timeline: view();
+    animation-range: entry -8% exit 108%;
+  }
+}
+
+.constellation-node,
+section#protocols .group,
+section#identity [class*="border-white/5"],
+section#archives [class*="border-white/10"],
+section#transmit [class*="border-white/5"] {
+  transition:
+    transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 280ms ease,
+    box-shadow 280ms ease,
+    filter 280ms ease,
+    opacity 280ms ease;
+  transform: translateZ(0);
+}
+
+.constellation-node:hover,
+section#protocols .group:hover,
+section#identity [class*="border-white/5"]:hover,
+section#archives [class*="border-white/10"]:hover,
+section#transmit [class*="border-white/5"]:hover {
+  transform: translateY(-4px) scale(1.018);
+  border-color: rgba(212, 255, 0, 0.42) !important;
+  box-shadow: 0 0 28px rgba(212, 255, 0, 0.12);
+  filter: brightness(1.15) contrast(1.08);
+}
+
+section#identity [class*="border-white/5"]:hover::after,
+section#archives [class*="border-white/10"]:hover::after,
+section#transmit [class*="border-white/5"]:hover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(212, 255, 0, 0.12), transparent);
+  animation: hudCharge 1.2s linear infinite;
+  mix-blend-mode: screen;
+}
+
+section#identity [class*="border-white/5"],
+section#archives [class*="border-white/10"],
+section#transmit [class*="border-white/5"] {
+  position: relative;
+  overflow: hidden;
+}
+
 @media (max-width: 767px) {
   header.fixed {
     padding: 0.75rem 1rem !important;
