@@ -148,7 +148,7 @@ const createTexture = (gl: WebGLRenderingContext) => {
   return texture;
 };
 
-const drawCoverBottom = (
+const drawContainBottom = (
   context: CanvasRenderingContext2D,
   image: HTMLImageElement,
   width: number,
@@ -156,7 +156,7 @@ const drawCoverBottom = (
 ) => {
   context.clearRect(0, 0, width, height);
 
-  const scale = Math.max(width / image.naturalWidth, height / image.naturalHeight);
+  const scale = Math.min(width / image.naturalWidth, height / image.naturalHeight);
   const drawWidth = image.naturalWidth * scale;
   const drawHeight = image.naturalHeight * scale;
   const drawX = (width - drawWidth) * 0.5;
@@ -332,8 +332,8 @@ export const HoverMaskReveal: React.FC<HoverMaskRevealProps> = ({
       maskContext.fillRect(0, 0, width, height);
 
       if (baseImageElement && revealImageElement) {
-        drawCoverBottom(baseContext, baseImageElement, width, height);
-        drawCoverBottom(revealContext, revealImageElement, width, height);
+        drawContainBottom(baseContext, baseImageElement, width, height);
+        drawContainBottom(revealContext, revealImageElement, width, height);
         uploadTexture(textures.base, baseRef.current.canvas);
         uploadTexture(textures.reveal, revealRef.current.canvas);
         uploadTexture(textures.mask, maskRef.current.canvas);
