@@ -148,7 +148,7 @@ const createTexture = (gl: WebGLRenderingContext) => {
   return texture;
 };
 
-const drawContainBottom = (
+const drawResponsiveHeroImage = (
   context: CanvasRenderingContext2D,
   image: HTMLImageElement,
   width: number,
@@ -156,11 +156,14 @@ const drawContainBottom = (
 ) => {
   context.clearRect(0, 0, width, height);
 
-  const scale = Math.min(width / image.naturalWidth, height / image.naturalHeight);
+  const isPhonePortrait = width / height < 0.75;
+  const scale = isPhonePortrait
+    ? Math.max(width / image.naturalWidth, height / image.naturalHeight)
+    : Math.min(width / image.naturalWidth, height / image.naturalHeight);
   const drawWidth = image.naturalWidth * scale;
   const drawHeight = image.naturalHeight * scale;
   const drawX = (width - drawWidth) * 0.5;
-  const drawY = height - drawHeight;
+  const drawY = isPhonePortrait ? 0 : height - drawHeight;
 
   context.drawImage(image, drawX, drawY, drawWidth, drawHeight);
 };
@@ -332,8 +335,8 @@ export const HoverMaskReveal: React.FC<HoverMaskRevealProps> = ({
       maskContext.fillRect(0, 0, width, height);
 
       if (baseImageElement && revealImageElement) {
-        drawContainBottom(baseContext, baseImageElement, width, height);
-        drawContainBottom(revealContext, revealImageElement, width, height);
+        drawResponsiveHeroImage(baseContext, baseImageElement, width, height);
+        drawResponsiveHeroImage(revealContext, revealImageElement, width, height);
         uploadTexture(textures.base, baseRef.current.canvas);
         uploadTexture(textures.reveal, revealRef.current.canvas);
         uploadTexture(textures.mask, maskRef.current.canvas);
