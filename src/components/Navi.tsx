@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import LogoMark from './LogoMark';
 
 const NAV_ITEMS = [
   { id: '00', label: 'CORE_SYS', desc: 'OVERVIEW', target: 'core_sys' },
@@ -84,7 +85,7 @@ export const Navi: React.FC = () => {
         <div className="flex items-center justify-center w-8 h-8 border border-white/20 rounded-sm relative overflow-hidden group cursor-pointer">
           <div className="absolute inset-0 bg-white/5 group-hover:bg-white/10 transition-colors" />
           <div className="absolute inset-x-1 bottom-1 h-px bg-[#d4ff00]" style={{ animation: 'navPulse 1.4s ease-in-out infinite' }} />
-          <span className="text-white font-bold text-lg leading-none mt-1 group-hover:scale-110 transition-transform">*</span>
+          <LogoMark className="relative z-10 h-6 w-6 group-hover:scale-110 transition-transform" />
         </div>
         <div>
           <div className="text-white font-semibold tracking-[0.2em] text-[10px] opacity-90">BLACKSIGNAL PROTOCOL</div>

@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import LogoMark from './LogoMark';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -51,7 +52,7 @@ export const FinalTransaction: React.FC = () => {
           1. LEFT SIDEBAR
       ────────────────────────────────────────────────────────────── */}
       <div className="w-[80px] h-full border-r border-white/5 flex flex-col items-center py-8 z-20 shrink-0 bg-black/20 backdrop-blur-sm">
-        <div className="text-xl font-light text-white/40 mb-12">*</div>
+        <LogoMark className="mb-12 h-8 w-8 opacity-70" />
         <div className="flex flex-col items-center space-y-2 mb-12">
           <div className="text-[#d4ff00] font-semibold text-lg leading-none">07</div>
           <div className="text-white/20 text-[10px] leading-none">/07</div>

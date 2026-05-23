@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import LogoMark from './LogoMark';
 
 interface LoadingScreenProps {
   onComplete: () => void;
@@ -179,7 +180,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
           <div className="absolute top-0 right-0 w-1 h-1 border-t border-r border-white/30" />
           <div className="absolute bottom-0 left-0 w-1 h-1 border-b border-l border-white/30" />
           <div className="absolute bottom-0 right-0 w-1 h-1 border-b border-r border-white/30" />
-          <span className="text-white/60 text-xl font-light group-hover:text-[#d4ff00] transition-colors">*</span>
+          <LogoMark className="h-8 w-8 opacity-75 group-hover:opacity-100 transition-opacity" />
         </div>
 
       </div>
