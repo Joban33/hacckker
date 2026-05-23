@@ -75,16 +75,11 @@ const FRAGMENT_SHADER = `
     float rawMask = texture2D(u_mask, maskUv).r;
     float mask = smoothstep(0.12, 0.58, rawMask);
     float edge = smoothstep(0.12, 0.48, rawMask) - smoothstep(0.5, 0.82, rawMask);
-
-    vec2 aberration = liquid * edge * 0.012 * u_strength;
     vec4 baseColor = texture2D(u_base, v_uv);
     vec4 revealColor = texture2D(u_reveal, v_uv);
 
-    revealColor.r = texture2D(u_reveal, v_uv + aberration).r;
-    revealColor.b = texture2D(u_reveal, v_uv - aberration).b;
-
-    vec3 edgeGlow = vec3(0.88, 1.0, 0.0) * edge * 0.16 * u_strength;
-    vec3 color = mix(baseColor.rgb, revealColor.rgb + edgeGlow, mask);
+    float edgeShade = edge * 0.04 * u_strength;
+    vec3 color = mix(baseColor.rgb, revealColor.rgb - edgeShade, mask);
     float alpha = max(baseColor.a, revealColor.a * mask);
 
     gl_FragColor = vec4(color, alpha);
@@ -153,7 +148,7 @@ const createTexture = (gl: WebGLRenderingContext) => {
   return texture;
 };
 
-const drawContainBottom = (
+const drawCoverBottom = (
   context: CanvasRenderingContext2D,
   image: HTMLImageElement,
   width: number,
@@ -161,7 +156,7 @@ const drawContainBottom = (
 ) => {
   context.clearRect(0, 0, width, height);
 
-  const scale = Math.min(width / image.naturalWidth, height / image.naturalHeight);
+  const scale = Math.max(width / image.naturalWidth, height / image.naturalHeight);
   const drawWidth = image.naturalWidth * scale;
   const drawHeight = image.naturalHeight * scale;
   const drawX = (width - drawWidth) * 0.5;
@@ -337,8 +332,8 @@ export const HoverMaskReveal: React.FC<HoverMaskRevealProps> = ({
       maskContext.fillRect(0, 0, width, height);
 
       if (baseImageElement && revealImageElement) {
-        drawContainBottom(baseContext, baseImageElement, width, height);
-        drawContainBottom(revealContext, revealImageElement, width, height);
+        drawCoverBottom(baseContext, baseImageElement, width, height);
+        drawCoverBottom(revealContext, revealImageElement, width, height);
         uploadTexture(textures.base, baseRef.current.canvas);
         uploadTexture(textures.reveal, revealRef.current.canvas);
         uploadTexture(textures.mask, maskRef.current.canvas);

@@ -14,14 +14,6 @@ import LoadingScreen from './components/LoadingScreen';
 import EndScreen from './components/EndScreen';
 import ScrollPhaseTelemetry from './components/ScrollPhaseTelemetry';
 
-// --- Placeholder for cursor blob if needed ---
-const CursorBlob = () => {
-  // A simple cursor blob, assuming it was a separate component or inline
-  return (
-    <div className="fixed top-1/2 left-1/2 w-[400px] h-[400px] bg-[#d4ff00]/10 rounded-full blur-[100px] pointer-events-none -translate-x-1/2 -translate-y-1/2 z-0 mix-blend-screen" />
-  );
-};
-
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -70,7 +62,6 @@ function App() {
               <div className="hud-noise absolute inset-0 opacity-[0.15]" />
             </div>
 
-            <CursorBlob />
             <ScrollPhaseTelemetry />
             
             {/* ─────────────────────────────────────────────────────────
@@ -94,9 +85,9 @@ function App() {
               {/* 3. Scrolling Ambient Typography and Dividers (z-20) */}
               <BackgroundContent />
 
-              {/* 4. Hacker Portrait overlapping text (z-30, free-floating, overflow-visible) */}
-              <main className="absolute inset-0 z-30 flex items-center justify-center pointer-events-none overflow-visible w-full px-4 md:px-0">
-                <div className="h-[60vh] sm:h-[80vh] md:h-[88vh] w-full md:w-auto md:aspect-[16/9] pointer-events-auto overflow-visible flex items-center justify-center transform translate-y-[5vh] md:translate-y-[9vh]">
+              {/* 4. Hacker Portrait overlapping text (z-30, full-section reveal canvas) */}
+              <main className="absolute inset-0 z-30 flex items-center justify-center pointer-events-none overflow-hidden w-full">
+                <div className="h-full w-full pointer-events-auto overflow-hidden flex items-center justify-center">
                   <HoverMaskReveal
                     baseImageSrc="/base_hacker.png"
                     hoverImageSrc="/hover_hacker.png"
