@@ -7,7 +7,7 @@ const REEL = [...WORDS, ...WORDS, ...WORDS, ...WORDS];
 export const BackgroundContent: React.FC = () => {
   return (
     // Full-viewport canvas — both layers positioned absolutely inside
-    <div className="absolute inset-0 z-20 pointer-events-none select-none overflow-hidden">
+    <div className="absolute inset-0 z-[35] pointer-events-none select-none overflow-hidden">
 
       {/* ───────────────────────────────────────────────────────────────
           LAYER 1 — Static faded background text
