@@ -3,11 +3,11 @@ import { useInView } from 'framer-motion';
 
 const SIMULATED_TRACE = {
   ip: '203.0.113.42',
-  city: 'SANDBOX NODE',
-  region: 'BLACKSIGNAL GRID',
-  country: 'SIMULATED',
-  lat: 0,
-  lon: 0,
+  city: 'AMRITSAR',
+  region: 'PUNJAB',
+  country: 'INDIA',
+  lat: 31.6203,
+  lon: 74.8765,
 };
 
 export const EndScreen: React.FC = () => {
@@ -109,11 +109,11 @@ export const EndScreen: React.FC = () => {
                   </span>
                 </div>
                 <div>
-                  <span className="text-red-500/40 text-[9px] md:text-[10px] block mb-1">SANDBOX COORDINATES:</span>
+                  <span className="text-red-500/40 text-[9px] md:text-[10px] block mb-1">SIMULATED COORDINATES:</span>
                   <span className="text-xs md:text-sm text-white/60 tracking-widest block mb-1 break-words">
                     LAT: {SIMULATED_TRACE.lat.toFixed(4)} // LON: {SIMULATED_TRACE.lon.toFixed(4)}
                   </span>
-                  <span className="text-red-500/40 text-[9px] md:text-[10px] block mt-3 mb-1">TRACE LOCATION:</span>
+                  <span className="text-red-500/40 text-[9px] md:text-[10px] block mt-3 mb-1">SIMULATED LOCATION:</span>
                   <span className="text-sm md:text-lg text-white/80 tracking-widest">
                     {`${SIMULATED_TRACE.city}, ${SIMULATED_TRACE.region}, ${SIMULATED_TRACE.country}`}
                   </span>
