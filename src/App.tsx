@@ -140,7 +140,7 @@ function App() {
             {/* ─────────────────────────────────────────────────────────
                 SECTION 7: GRAND FINALE (End Screen)
             ───────────────────────────────────────────────────────── */}
-            <div id="hacked">
+            <div id="finale">
               <EndScreen />
             </div>
 

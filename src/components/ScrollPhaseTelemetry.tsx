@@ -7,7 +7,7 @@ const PHASES = [
   { id: 'protocols', code: '03', label: 'PROTOCOLS' },
   { id: 'sys_logs', code: '04', label: 'SYS_LOGS' },
   { id: 'transmit', code: '05', label: 'TRANSMIT' },
-  { id: 'hacked', code: '06', label: 'BREACH' },
+  { id: 'finale', code: '06', label: 'FINALE' },
 ];
 
 const clamp = (value: number, min = 0, max = 1) => Math.min(max, Math.max(min, value));
